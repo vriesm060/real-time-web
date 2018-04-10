@@ -14,6 +14,6 @@ m.parentNode.addEventListener('submit', function (e) {
 
 socket.on('chat message', function(msg) {
   var li = document.createElement('li');
-  li.textContent = msg.username + ': ' + msg.msg;
+  li.textContent = msg;
   messages.appendChild(li);
 });

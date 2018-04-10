@@ -14,6 +14,11 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
+app.post('/chat', function (req, res) {
+  var username = req.body.username;
+  res.render('chat');
+});
+
 /*
 
   To do:
