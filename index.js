@@ -10,15 +10,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-app.get('/', function (req, res) {
-  res.render('index');
-});
-
-app.post('/chat', function (req, res) {
-  var username = req.body.username;
-  res.render('chat');
-});
-
 /*
 
   To do:
@@ -30,16 +21,46 @@ app.post('/chat', function (req, res) {
 
 */
 
-io.on('connection', function(socket) {
-  console.log('a user connected');
+app.get('/', function (req, res) {
+  res.render('index');
+});
 
-  socket.on('chat message', function(msg) {
-    io.emit('chat message', msg);
-  });
+app.get('/chat', function (req, res) {
+  res.render('chat');
+});
+
+function capitalizeFirstLetter (str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// io.use(function (socket, next) {
+//   var username = capitalizeFirstLetter(socket.handshake.query.username);
+//   return next();
+// });
+
+io.on('connection', function (socket) {
+  var username = capitalizeFirstLetter(socket.handshake.query.username);
+
+  console.log(`${username} connected`);
+
+  // socket.on('chat message', function (msg) {
+  //   console.log(msg);
+  //   io.emit('chat message', {
+  //     username: username,
+  //     msg: msg
+  //   });
+  // });
+
+
 
   socket.on('disconnect', function() {
-    console.log('a user disconnected');
+    console.log(`${username} disconnected`);
   });
+
+});
+
+io.of('/chat').on('chat message', function (msg) {
+  console.log(msg);
 });
 
 http.listen(3000);
