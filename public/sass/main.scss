@@ -39,14 +39,6 @@
         background-color: #fff;
         box-shadow: inset 5px 5px 5px rgba(0,0,0,.5);
       }
-
-      &.red:checked + label {
-        background-color: #FF004C;
-      }
-
-      &.yellow:checked + label {
-        background-color: #FFEE19;
-      }
     }
   }
 }
