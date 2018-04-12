@@ -10,17 +10,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-/*
-
-  To do:
-  ______
-
-  * Show history of chat messages
-  * Show information about the users
-  *
-
-*/
-
 app.get('/', function (req, res) {
   res.render('index');
 });
