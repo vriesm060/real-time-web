@@ -1,19 +1,13 @@
 var socket = io();
-var m = document.getElementById('m');
-var messages = document.getElementById('messages');
+var checkbox = document.querySelectorAll('.board input');
 
-// m.parentNode.addEventListener('submit', function (e) {
-//   socket.emit('chat message', m.value);
-//   m.value = '';
-//   e.preventDefault();
-// }, false);
-//
-// socket.on('chat message', function(msg) {
-//   var li = document.createElement('li');
-//   li.textContent = msg.username + ': ' + msg.msg;
-//   messages.appendChild(li);
-// });
+checkbox.forEach(function (item) {
+  item.addEventListener('click', function () {
+    var id = this.getAttribute('id');
+    socket.emit('add-move', id);
+  }, false);
+});
 
-socket.on('add-player', function (player) {
-  console.log(player);
+socket.on('add-move', function (move) {
+  document.getElementById(move.id).nextElementSibling.style.backgroundColor = move.player;
 });

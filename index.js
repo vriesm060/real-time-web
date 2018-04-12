@@ -15,9 +15,9 @@ app.get('/', function (req, res) {
 });
 
 var numOfPlayers = 0;
-var players = ['red', 'yellow'];
+var players = ['#FF004C', '#FFEE19'];
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
 
   var player = players[numOfPlayers];
 
@@ -28,19 +28,19 @@ io.on('connection', function(socket) {
   } else {
     console.log(`Player ${player} connected`);
 
-    socket.emit('add-player', player);
-
-
-
-    // socket.on('chat message', function(msg) {
-    //   io.emit('chat message', msg);
-    // });
+    socket.on('add-move', function (id) {
+      console.log(id);
+      io.emit('add-move', {
+        player: player,
+        id: id
+      });
+    });
 
   }
 
   numOfPlayers++;
 
-  socket.on('disconnect', function() {
+  socket.on('disconnect', function () {
     if (numOfPlayers > 2) {
       console.log(`Bye bye`);
     } else {
