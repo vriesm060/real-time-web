@@ -8,14 +8,25 @@
   line-height: inherit;
 }
 
+body {
+  font-family: montserrat, arial, sans-serif;
+  font-weight: 300;
+}
+
 /*
 ====================
     Board
 ====================
 */
 
-.board {
+.wrapper {
+  width: 100%;
+  max-width: 35rem;
   margin: 2rem auto;
+}
+
+.board {
+  margin: 2rem 0;
   border-collapse: collapse;
   background-color: #098CB2;
   box-shadow: 5px 5px 5px rgba(0,0,0,.5s);
