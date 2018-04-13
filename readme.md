@@ -18,7 +18,7 @@ To start the game locally, run `npm start`. The server will run by default on po
 ## Features
 
 * [x] Playing real time
-* [x] Calculating a win in horizontal and vertical direction
+* [x] Calculating a win in all directions
 
 ## What's used?
 
@@ -29,7 +29,6 @@ To start the game locally, run `npm start`. The server will run by default on po
 
 ## To do
 
-* [ ] Calculating a win in diagonal direction
 * [ ] Waiting on an opponents turn
 * [ ] Adding a waiting room when when there are no opponents
 * [ ] Adding multiple game rooms
