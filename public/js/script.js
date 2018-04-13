@@ -10,14 +10,14 @@ checkbox.forEach(function (item) {
 
 socket.on('add-move', function (disc) {
   connectFour.dropDisc(disc);
-  connectFour.checkRows();
+  // connectFour.checkRows();
 });
 
 var connectFour = {
-  selectedRows: [],
-  selectedCols: [],
+  playerRedMoves: [],
+  playerYellowMoves: [],
   curRow: function (id) {
-    return id.slice(1);
+    return id.slice(2);
   },
   curCol: function (id) {
     return id.slice(0, 1);
@@ -27,24 +27,27 @@ var connectFour = {
 
     for (var i = 1; i < 7; i++) {
       // If disc is already in place:
-      if (document.getElementById(this.curCol(disc.id) + i).disabled === false) {
+      // console.log(document.getElementById(this.curCol(disc.id)));
+      if (document.getElementById(`${this.curCol(disc.id)},${i}`).disabled === false) {
         arr.push(i);
       }
     }
 
     var row = arr[0];
     var col = this.curCol(disc.id);
+    var space = `${col},${row}`;
 
-    this.selectedRows.push(row);
-    this.selectedCols.push(col);
+    document.getElementById(space).disabled = true;
 
-    document.getElementById(this.curCol(disc.id) + arr[0]).disabled = true;
-    document.getElementById(this.curCol(disc.id) + arr[0]).nextElementSibling.style.backgroundColor = disc.player;
-  },
-  checkRows: function () {
-    console.log(this.selectedRows);
+    if (disc.player === 'red') {
+      this.playerRedMoves.push(space);
+      document.getElementById(space).nextElementSibling.style.backgroundColor = '#FF004C';
+    } else {
+      this.playerYellowMoves.push(space);
+      document.getElementById(space).nextElementSibling.style.backgroundColor = '#FFEE19';
+    }
 
-    
-
+    console.log(`Player red moves: ${this.playerRedMoves}`);
+    console.log(`Player yellow moves: ${this.playerYellowMoves}`);
   }
 };

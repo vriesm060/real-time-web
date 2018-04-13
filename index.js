@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
 });
 
 var numOfPlayers = 0;
-var players = ['#FF004C', '#FFEE19'];
+var players = ['red', 'yellow'];
 
 io.on('connection', function (socket) {
 
