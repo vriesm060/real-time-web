@@ -29,7 +29,6 @@ io.on('connection', function (socket) {
     console.log(`Player ${player} connected`);
 
     socket.on('add-move', function (id) {
-      console.log(id);
       io.emit('add-move', {
         player: player,
         id: id

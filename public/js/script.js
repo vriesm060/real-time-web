@@ -1,5 +1,6 @@
 var socket = io();
 var checkbox = document.querySelectorAll('.board input');
+var h1 = document.querySelector('h1');
 
 checkbox.forEach(function (item) {
   item.addEventListener('click', function () {
@@ -40,19 +41,20 @@ var connectFour = {
     if (disc.player === 'red') {
       this.playerRedMoves.push(space);
       document.getElementById(space).nextElementSibling.style.backgroundColor = '#FF004C';
+      if (this.checkMovesHorizontal(space, this.playerRedMoves) >= 3 || this.checkMovesVertical(space, this.playerRedMoves) >= 3) {
+        console.log('Red won!');
+        h1.textContent = 'Red won!';
+      }
     } else {
       this.playerYellowMoves.push(space);
       document.getElementById(space).nextElementSibling.style.backgroundColor = '#FFEE19';
-    }
-
-    console.log(`Player red moves: ${this.playerRedMoves}`);
-    console.log(`Player yellow moves: ${this.playerYellowMoves}`);
-
-    if (this.checkMovesHorizontal(space) >= 3 || this.checkMovesVertical(space) >= 3) {
-      console.log('4 in a row!');
+      if (this.checkMovesHorizontal(space, this.playerYellowMoves) >= 3 || this.checkMovesVertical(space, this.playerYellowMoves) >= 3) {
+        console.log('Yellow won!');
+        h1.textContent = 'Yellow won!';
+      }
     }
   },
-  checkMovesHorizontal: function (space) {
+  checkMovesHorizontal: function (space, playerMoves) {
     var col = this.curCol(space);
     var row = this.curRow(space);
 
@@ -60,7 +62,7 @@ var connectFour = {
     var right = 0;
 
     for (var i = col - 1; i > 0; i--) {
-      if (this.playerRedMoves.includes(`${i}.${row}`)) {
+      if (playerMoves.includes(`${i}.${row}`)) {
         left++;
       } else {
         break;
@@ -68,7 +70,7 @@ var connectFour = {
     }
 
     for (var i = col + 1; i < 8; i++) {
-      if (this.playerRedMoves.includes(`${i}.${row}`)) {
+      if (playerMoves.includes(`${i}.${row}`)) {
         right++;
       } else {
         break;
@@ -79,7 +81,7 @@ var connectFour = {
 
     return idx;
   },
-  checkMovesVertical: function (space) {
+  checkMovesVertical: function (space, playerMoves) {
     var col = this.curCol(space);
     var row = this.curRow(space);
 
@@ -87,7 +89,7 @@ var connectFour = {
     var top = 0;
 
     for (var i = row - 1; i > 0; i--) {
-      if (this.playerRedMoves.includes(`${col}.${i}`)) {
+      if (playerMoves.includes(`${col}.${i}`)) {
         bottom++;
       } else {
         break;
@@ -95,7 +97,7 @@ var connectFour = {
     }
 
     for (var i = row + 1; i < 8; i++) {
-      if (this.playerRedMoves.includes(`${col}.${i}`)) {
+      if (playerMoves.includes(`${col}.${i}`)) {
         top++;
       } else {
         break;
