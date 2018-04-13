@@ -1,26 +1,36 @@
-# Real-time chat
+# Real-time Connect Four game
 
-For the school subject "Real-Time Web", we'll create a web app that uses templating, routing and a remote database. 
+For the school subject "Real-Time Web", I created a web app that uses templating, routing and a remote database.
 
-This is a basic chat app, made with [socket.io](https://socket.io/). The assignment is to set up this basic chat with the addition of a feature to your choice.
-![preview](preview-chat.png)
+This is a Connect Four game, made real-time with [socket.io](https://socket.io/).
 
-###### Setting up the environment. 
+![preview](screenshots/preview.png)
+[Live demo](https://real-time-web-rwotcjqkkl.now.sh/)
 
- fork the repo, found on []
- 1. run ```npm init``` to initialize the npm package
- 2. install the following modules: 
-    - [Express](https://expressjs.com/)
-    - [Nodemon](https://nodemon.io/)
-    - [EJS](http://www.embeddedjs.com/)
-3. write the following in index.js: 
-```javascript
-var express = require("express")
-var app = express()
-var port = 4000
+## Installing
 
-app.listen(port, console.log('listen on port:' + port);
-```
+In order to install this app on your local computer, fork this repo, then run `git clone` in your terminal and install the packages with npm, using `npm install`.
 
+## Getting started
 
+To start the game locally, run `npm start`. The server will run by default on port 3000.
 
+## Features
+
+* [x] Playing real time
+* [x] Calculating a win in horizontal and vertical direction
+
+## What's used?
+
+* [x] [Socket.io](https://socket.io/)
+* [x] [EJS](http://ejs.co/)
+* [x] [Express](expressjs.com)
+* [x] [Sass](https://sass-lang.com/)
+
+## To do
+
+* [ ] Calculating a win in diagonal direction
+* [ ] Waiting on an opponents turn
+* [ ] Adding a waiting room when when there are no opponents
+* [ ] Adding multiple game rooms
+* [ ] Giving a more fluid playing experience
