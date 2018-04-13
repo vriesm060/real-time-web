@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit; }
+
+/*
+====================
+    Board
+====================
+*/
+.board {
+  margin: 2rem auto;
+  border-collapse: collapse;
+  background-color: #098CB2;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5); }
+  .board td {
+    width: 5rem;
+    height: 5rem;
+    padding: .5rem; }
+    .board td input {
+      position: absolute;
+      left: -200%;
+      top: -200%;
+      opacity: 0; }
+      .board td input + label {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.5); }

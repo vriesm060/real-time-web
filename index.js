@@ -14,26 +14,38 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
-/*
+var numOfPlayers = 0;
+var players = ['red', 'yellow'];
 
-  To do:
-  ______
+io.on('connection', function (socket) {
 
-  * Show history of chat messages
-  * Show information about the users
-  *
+  var player = players[numOfPlayers];
 
-*/
+  // [!] Add something when there are more people connected,
+  // like a waiting room or something
+  if (numOfPlayers > 2) {
+    console.log(`Game room is full, please come back later`);
+  } else {
+    console.log(`Player ${player} connected`);
 
-io.on('connection', function(socket) {
-  console.log('a user connected');
+    socket.on('add-move', function (id) {
+      io.emit('add-move', {
+        player: player,
+        id: id
+      });
+    });
 
-  socket.on('chat message', function(msg) {
-    io.emit('chat message', msg);
-  });
+  }
 
-  socket.on('disconnect', function() {
-    console.log('a user disconnected');
+  numOfPlayers++;
+
+  socket.on('disconnect', function () {
+    if (numOfPlayers > 2) {
+      console.log(`Bye bye`);
+    } else {
+      console.log(`Player ${player} disconnected`);
+    }
+    numOfPlayers--;
   });
 });
 
